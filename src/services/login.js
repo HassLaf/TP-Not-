@@ -1,12 +1,15 @@
 // login.js
 const userBase = require('../models/userShema');
 const authService = require('./authService');
+const bcrypt = require('bcrypt');
 
-async function login(userName, password) {
+
+
+async function login(uEmail, password) {
     try {
         console.log("Recherche du Nom dans la base de données ...");
 
-        const userData = await userBase.findOne({ name: userName });
+        const userData = await userBase.findOne({ email : uEmail });
 
         if (!userData) {
             // L'utilisateur n'a pas été trouvé
@@ -14,12 +17,14 @@ async function login(userName, password) {
             return { error: 'Utilisateur non trouvé' };
         }
 
-        if (userData.password === password) {
-            const accessToken = authService.generateAccessToken(userData.toObject());
-            return { accessToken };
-        } else {
-            return { error: 'Coordonnées incorrectes' };
-        }
+        bcrypt.compare(password, userData.Hashedpassword, function(err, result) {
+            if(result){
+                const accessToken = authService.generateAccessToken(userData.toObject());
+                return { accessToken };
+            } else {
+                return { error: 'Coordonnées incorrectes' };
+            }
+        });
     } catch (error) {
         console.error('Error during login:', error);
         return { error: 'Internal Server Error' };
