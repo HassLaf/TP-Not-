@@ -8,7 +8,7 @@ const autRequest = require('../services/authService')
 // Version 1 d'API"
 router.get('/',Controllerv2.Hi)
 router.post('/addUser',Controllerv2.addUser);
-//router.get('/createAccount',Controllerv2.baseShow);
+router.post('/login',ControllerAuth.loginFunction);
 
 
 

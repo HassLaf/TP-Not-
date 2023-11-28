@@ -17,14 +17,13 @@ async function login(uEmail, password) {
             return { error: 'Utilisateur non trouvé' };
         }
 
-        bcrypt.compare(password, userData.Hashedpassword, function(err, result) {
-            if(result){
-                const accessToken = authService.generateAccessToken(userData.toObject());
-                return { accessToken };
-            } else {
-                return { error: 'Coordonnées incorrectes' };
-            }
-        });
+        result = bcrypt.compare(password, userData.Hashedpassword);
+        if(result){
+            const accessToken = authService.generateAccessToken(userData.toObject());
+            return { accessToken };
+        } else {
+            return { error: 'Coordonnées incorrectes' };
+        }
     } catch (error) {
         console.error('Error during login:', error);
         return { error: 'Internal Server Error' };

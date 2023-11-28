@@ -6,7 +6,7 @@ const userBase = require('../../models/userShema')
 loginFunction = async function loginFunction(req, res) {
     const { email, password } = req.body;
     const loginResult = await loginService.login(email, password);
-
+    console.log(loginResult.accessToken);
     if (loginResult.accessToken) {
         res.json({ accessToken: loginResult.accessToken });
     } else {
