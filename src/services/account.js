@@ -1,5 +1,6 @@
 const userModel = require('../models/userShema');
 const bcrypt = require ('bcrypt');
+
 createUser = async function createUser(userName,email,newPassword){
     try {
     // Générer un sel (salt)
@@ -11,9 +12,9 @@ createUser = async function createUser(userName,email,newPassword){
 
     // Création et sauvegarde d'un utilisateur
     const newUser = new userModel({
+        "research_Historie" : null,
         "name": userName,
         "email": email,
-        "salt": salt,
         "Hashedpassword": hashedPassword
     });
   
