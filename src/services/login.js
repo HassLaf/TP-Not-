@@ -9,7 +9,7 @@ async function login(uEmail, password) {
     try {
         console.log("Recherche du Nom dans la base de données ...");
 
-        const userData = await userBase.findOne({ email : uEmail });
+        const userData = await userBase.findOne({ email : uEmail },'name email');
 
         if (!userData) {
             // L'utilisateur n'a pas été trouvé

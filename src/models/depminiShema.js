@@ -2,9 +2,9 @@ const { default : mongoose} = require ("mongoose")
 
 const depSchema = new mongoose.Schema({
         "N°_département_(BAN)": Number,
-        "Date_réception_DPE": Date,
-        "Date_établissement_DPE": Date,
-        "Date_visite_diagnostiqueur": Date,
+        "Date_réception_DPE": String,
+        "Date_établissement_DPE": String,
+        "Date_visite_diagnostiqueur": String,
         "Etiquette_GES": String,
         "Etiquette_DPE": String,
         "Année_construction": Number,

@@ -10,7 +10,7 @@ router.get('/',Controllerv2.Hi)
 router.get('/allDepartement',Controllerv2.baseDepartementShow);
 router.post('/addUser',Controllerv2.addUser);
 router.post('/login',ControllerAuth.loginFunction);
-router.post('/search',Controllerv2.searchHouse);
+router.post('/search',autRequest.authenticateToken,Controllerv2.searchHouse);
 
 
 
