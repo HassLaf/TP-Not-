@@ -1,8 +1,9 @@
 const depModel = require("../models/depminiShema");
 const userSearchModel = require("../models/usersSearchShema");
 const axios = require('axios');
+const { Types: { ObjectId } } = require('mongoose');
 
- displayBase = async function (){
+displayBase = async function (){
     const  allData = await depModel.find();
     return allData;
 }
@@ -81,6 +82,8 @@ searchByInfos = async function (userId,codePostal,label_GES,label_DPE,surface,su
             "Etiquette_GES": label_GES,
             'Code_postal_(BAN)': codePostal,
             "Surface_habitable_logement": surface,
+            "Suraface_minimale" : surfaceMin,
+            "Surface_maximale" : surfaceMax
             },
         });
 
@@ -102,6 +105,27 @@ showSearchsDoneByUser = async function(userId){
     } catch(error){
         console.log("erreur d'affichage des recherches ...",error);
         return { error: 'Internal Server Error - showSearchsDoneByUser' };
+    }
+}
+
+retrySearch = async function(idUser,idSearch){
+    try {
+    
+        // Vérifier si l'utilisateur a le droit de supprimer la recherche
+        const searchToAsk = await userSearchModel.findOne({ _id: new ObjectId(idSearch), id_User: idUser });
+
+        if (!searchToAsk) {
+            console.log('La recherche n\'a pas été trouvée ou vous n\'avez pas les droits pour l\'effectué .');
+            return { success: false, message: 'Recherche non trouvée ou droits insuffisants.' };
+        }
+
+        // relancer la recherche et la sauvegarder
+        const parametersOfSearch = await userSearchModel.findOne({ _id:  new ObjectId(idSearch) },'parameters');
+        return (searchByInfos(idUser,parametersOfSearch.address,parametersOfSearch.Etiquette_GES,parametersOfSearch.Etiquette_DPE,parametersOfSearch.Surface_habitable_logement,parametersOfSearch.Suraface_minimale,parametersOfSearch.Surface_maximale));
+
+        } catch (error) {
+        console.error('Erreur lors de la suppression de la recherche :', error);
+        throw error;
     }
 }
 // Supprimer une recherche par son ID
@@ -137,5 +161,6 @@ module.exports ={
     displayBase,
     searchByInfos,
     showSearchsDoneByUser,
+    retrySearch,
     deleteSearchById
 }

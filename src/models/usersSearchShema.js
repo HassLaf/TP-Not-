@@ -8,7 +8,9 @@ const usersSearchShema = new mongoose.Schema({
         "Etiquette_DPE" : String,
         "Etiquette_GES" : String,
         "Code_postal_(BAN)" : Number,
-        "Surface_habitable_logement": Number
+        "Surface_habitable_logement": Number,
+        "Suraface_minimale" : Number,
+        "Surface_maximale" : Number
     }
 })
 

@@ -59,6 +59,20 @@ showSearchsByUser = async function showSearchsByUser(req,res){
     res.status(500).json({error:'Server Error'});
   }
 }
+
+
+retrySearch = async function retrySearch(req,res){
+  console.log("Controlleur de relancement d'une recherche ...;");
+  idUser = req.user;
+  const {idSearch} = req.body;
+  try{
+    retrySearchResult = await searchServices.retrySearch(idUser,idSearch);
+    res.status(200).json(retrySearchResult);
+  } catch(error){
+    console.error('Error retrying a search ...',error);
+    res.status(500).json({error:'Server Error'});
+  }
+}
 deleteSearch = async function deleteSearch(req,res){
   console.log("Controlleur de supprission d'une recherche ...");
   idUser = req.user;
@@ -80,5 +94,6 @@ module.exports = {
   baseDepartementShow,
   searchHouse,
   showSearchsByUser,
+  retrySearch,
   deleteSearch
 };
