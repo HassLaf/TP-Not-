@@ -1,6 +1,5 @@
 const depModel = require("../models/depminiShema");
-const usersSearchModel = require("../models/usersSearchShema");
-
+const userSearchModel = require("../models/usersSearchShema");
 const axios = require('axios');
 
  displayBase = async function (){
@@ -96,6 +95,15 @@ searchByInfos = async function (userId,codePostal,label_GES,label_DPE,surface,su
     }
 }  
 
+showSearchsDoneByUser = async function(userId){
+    try {
+        const searchsDone = await userSearchModel.find({id_User: userId},'result parameters');
+        return searchsDone;
+    } catch(error){
+        console.log("erreur d'affichage des recherches ...",error);
+        return { error: 'Internal Server Error - showSearchsDoneByUser' };
+    }
+}
 // Supprimer une recherche par son ID
 deleteSearchById = async function deleteSearchById(userId, searchId) {
     try {
@@ -128,5 +136,6 @@ deleteSearchById = async function deleteSearchById(userId, searchId) {
 module.exports ={
     displayBase,
     searchByInfos,
+    showSearchsDoneByUser,
     deleteSearchById
 }

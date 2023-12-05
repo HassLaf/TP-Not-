@@ -14,6 +14,5 @@ const usersSearchShema = new mongoose.Schema({
 
 userSearchModel = mongoose.model("Hass-userSearchShema",usersSearchShema);
 
-module.exports = {
-    usersSearchShema
-}
+module.exports = userSearchModel;
+

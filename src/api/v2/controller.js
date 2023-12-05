@@ -48,6 +48,17 @@ searchHouse = async function searchHouse(req,res){
   }
 }
 
+showSearchsByUser = async function showSearchsByUser(req,res){
+  console.log("Controlleur d'affichage des anciens recherches");
+  idUser = req.user;
+  try{
+    historySearchs = await searchServices.showSearchsDoneByUser(idUser);
+    res.status(200).json(historySearchs);
+  } catch(error){
+    console.error('Error showing the history of searchs ...',error);
+    res.status(500).json({error:'Server Error'});
+  }
+}
 deleteSearch = async function deleteSearch(req,res){
   console.log("Controlleur de supprission d'une recherche ...");
   idUser = req.user;
@@ -68,5 +79,6 @@ module.exports = {
   addUser,
   baseDepartementShow,
   searchHouse,
+  showSearchsByUser,
   deleteSearch
 };
