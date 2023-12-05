@@ -38,9 +38,9 @@ baseDepartementShow = async function baseDepartementShow(req,res){
 searchHouse = async function searchHouse(req,res){
   console.log("Controlleur de la recherche de maison entrain d'exécution ...");
   idUser = req.user
-  const {codePostal,GES,DPE,surface_req} = req.body;
+  const {codePostal,GES,DPE,surface_req,surfaceMin_req,surfaceMax_req} = req.body;
   try{
-    searchResult = await searchServices.searchByInfos(idUser,codePostal,GES,DPE,surface_req);
+    searchResult = await searchServices.searchByInfos(idUser,codePostal,GES,DPE,surface_req,surfaceMin_req,surfaceMax_req);
     res.status(200).json(searchResult);
   } catch(error){
     console.error('Error during researching ...',error);
