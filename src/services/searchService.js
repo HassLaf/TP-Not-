@@ -96,10 +96,37 @@ searchByInfos = async function (userId,codePostal,label_GES,label_DPE,surface,su
     }
 }  
 
+// Supprimer une recherche par son ID
+deleteSearchById = async function deleteSearchById(userId, searchId) {
+    try {
+        // Vérifier si l'utilisateur a le droit de supprimer la recherche
+        const searchToDelete = await userSearchModel.findOne({ _id: searchId, id_User: userId });
+
+        if (!searchToDelete) {
+            console.log('La recherche n\'a pas été trouvée ou vous n\'avez pas les droits pour la supprimer.');
+            return { success: false, message: 'Recherche non trouvée ou droits insuffisants.' };
+        }
+
+        // Supprimer la recherche
+        const result = await userSearchModel.deleteOne({ _id: searchId });
+
+        if (result.deletedCount === 1) {
+            console.log('La recherche a été supprimée avec succès.');
+            return { success: true, message: 'Recherche supprimée avec succès.' };
+        } else {
+            console.log('Aucune recherche n\'a été supprimée ou une erreur s\'est produite.');
+            return { success: false, message: 'Erreur lors de la suppression de la recherche.' };
+        }
+    } catch (error) {
+        console.error('Erreur lors de la suppression de la recherche :', error);
+        throw error;
+    }
+}
 
 
 
 module.exports ={
     displayBase,
-    searchByInfos
+    searchByInfos,
+    deleteSearchById
 }

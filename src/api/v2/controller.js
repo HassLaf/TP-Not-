@@ -48,12 +48,25 @@ searchHouse = async function searchHouse(req,res){
   }
 }
 
+deleteSearch = async function deleteSearch(req,res){
+  console.log("Controlleur de supprission d'une recherche ...");
+  idUser = req.user;
+  try{
+    const {idSearch} = req.body;
+    const result = await searchServices.deleteSearchById(idUser,idSearch);
+    res.status(200).json(result);
+  }catch(error){
+    console.error('Error during deleting search ...',error);
+    res.status(500).json({error:'Server Error'});
+  }
 
+}
 
 module.exports = {
   Hi,
   baseShow,
   addUser,
   baseDepartementShow,
-  searchHouse
+  searchHouse,
+  deleteSearch
 };

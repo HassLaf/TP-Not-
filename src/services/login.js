@@ -9,16 +9,19 @@ async function login(uEmail, password) {
     try {
         console.log("Recherche du Nom dans la base de données ...");
 
-        const userData = await userBase.findOne({ email : uEmail },'name email');
-
+        const userData = await userBase.findOne({ email : uEmail });
+        console.log(userData);
         if (!userData) {
             // L'utilisateur n'a pas été trouvé
             console.log('Utilisateur non trouvé');
             return { error: 'Utilisateur non trouvé' };
         }
 
-        result = bcrypt.compare(password, userData.Hashedpassword);
+        const result = await bcrypt.compare(password, userData.Hashedpassword);
+        //console.log(result);
+
         if(result){
+            const userData = await userBase.findOne({ email : uEmail },'name email');
             const accessToken = authService.generateAccessToken(userData.toObject());
             return { accessToken };
         } else {
