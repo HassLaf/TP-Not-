@@ -1,9 +1,6 @@
 // services/authService.js
 const jwt = require('jsonwebtoken');
-//const bcrypt = require('bcryptjs');
-const usersData = require('../models/userShema');
-// chargement du fichier d'env
-require('dotenv').config();
+
 // accès au variables
 key_ACCESS = process.env.ACCESS_TOKEN_SECRET;
 

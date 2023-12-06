@@ -73,7 +73,7 @@ searchByInfos = async function (userId,codePostal,label_GES,label_DPE,surface,su
             }
 
         }
-        console.log(resultsWithCoordinates);
+        // console.log(resultsWithCoordinates);
         
         // Enregistrez les informations de recherche avec l'ID de l'utilisateur
         const userSearchData = new userSearchModel({
@@ -125,9 +125,9 @@ retrySearch = async function(idUser,idSearch){
         // relancer la recherche et la sauvegarder
         const parametersOfSearch = await userSearchModel.findOne({ _id:  new ObjectId(idSearch) },'parameters');
         
-        const DPE_retry = parametersOfSearch.parameters.Etiquette_DPE;
-        const GES_retry = parametersOfSearch.parameters.Etiquette_GES;
-        const adress_retry = parametersOfSearch.parameters.Surface_habitable_logement;
+        // const DPE_retry = parametersOfSearch.parameters.Etiquette_DPE;
+        // const GES_retry = parametersOfSearch.parameters.Etiquette_GES;
+        // const adress_retry = parametersOfSearch.parameters.Surface_habitable_logement;
 
         // console.log(parametersOfSearch);
 
