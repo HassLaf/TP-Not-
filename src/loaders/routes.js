@@ -1,28 +1,25 @@
 // routes.js
 const express = require('express');
 const router = express.Router();
-const Controllerv2 = require('../api/v2/controller.js');
+const generalController = require('../api/v2/generalController.js');
+const searchController = require('../api/v2/searchController.js');
 const ControllerAuth = require('../api/v2/authController.js');
 const autRequest = require('../services/authService')
 
-// Version 1 d'API"
+// Controlle d'authentification 
 
 router.post('/login',ControllerAuth.loginController);
 router.post('/refresh',ControllerAuth.refreshController);
-router.get('/allDepartement',Controllerv2.baseDepartementShow);
 
-router.get('/',Controllerv2.Hi);
-router.post('/addUser',Controllerv2.addUser);
-router.post('/search',autRequest.authenticateToken,Controllerv2.searchHouse);
-router.post('/history',autRequest.authenticateToken,Controllerv2.showSearchsByUser);
-router.post('/retrySearch',autRequest.authenticateToken,Controllerv2.retrySearch);
-router.post('/deleteSearch',autRequest.authenticateToken,Controllerv2.deleteSearch);
+// Des chemins génèrals.
+router.get('/',generalController.Hi);
+router.post('/addUser',generalController.addUser);
+router.get('/allDepartement',generalController.baseDepartementShow);
 
-
-
-
-// router.get('/userBase',authenticateToken,Controllerv2.userShow);
-// router.get('/genToken',authenticateToken,ControllerAuth.generateToken);
-// router.post('/login',ControllerAuth.loginFunction);
+// Les chemins qui consernent les recherches.
+router.post('/search',autRequest.authenticateToken,searchController.searchHouse);
+router.post('/history',autRequest.authenticateToken,searchController.showSearchsByUser);
+router.post('/retrySearch',autRequest.authenticateToken,searchController.retrySearch);
+router.post('/deleteSearch',autRequest.authenticateToken,searchController.deleteSearch);
 
 module.exports = router;
