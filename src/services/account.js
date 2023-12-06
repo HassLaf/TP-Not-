@@ -12,14 +12,13 @@ createUser = async function createUser(userName,email,newPassword){
 
     // Création et sauvegarde d'un utilisateur
     const newUser = new userModel({
-        "research_Historie" : null,
         "name": userName,
         "email": email,
         "Hashedpassword": hashedPassword
     });
   
-  newUser.save()
-  return newUser;
+    newUser.save()
+    return newUser;
 }catch(error){
     console.error('Error adding user:', error);
     return json({ error: 'Server Error' });
