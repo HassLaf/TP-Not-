@@ -35,7 +35,9 @@ searchByInfos = async function (userId,codePostal,label_GES,label_DPE,surface,su
             };
         }
         const filteredData = await depModel.find(query);
-        console.log(filteredData);
+        
+        //console.log(filteredData);
+        
         // Array to store the results with coordinates
         const resultsWithCoordinates = [];
         
@@ -54,7 +56,7 @@ searchByInfos = async function (userId,codePostal,label_GES,label_DPE,surface,su
             });
             //console.log(nominatimResponse.data);
             // Extract latitude and longitude from the Nominatim response
-            console.log(nominatimResponse.data[0])
+            //console.log(nominatimResponse.data[0])
             // Check if coordinates are found in the response
             if (nominatimResponse.data && nominatimResponse.data.length > 0) {
                 // Extract latitude and longitude from the Nominatim response
@@ -108,6 +110,7 @@ showSearchsDoneByUser = async function(userId){
     }
 }
 
+// Relancement d'une recherche
 retrySearch = async function(idUser,idSearch){
     try {
     
@@ -121,13 +124,27 @@ retrySearch = async function(idUser,idSearch){
 
         // relancer la recherche et la sauvegarder
         const parametersOfSearch = await userSearchModel.findOne({ _id:  new ObjectId(idSearch) },'parameters');
-        return (searchByInfos(idUser,parametersOfSearch.address,parametersOfSearch.Etiquette_GES,parametersOfSearch.Etiquette_DPE,parametersOfSearch.Surface_habitable_logement,parametersOfSearch.Suraface_minimale,parametersOfSearch.Surface_maximale));
+        
+        const DPE_retry = parametersOfSearch.parameters.Etiquette_DPE;
+        const GES_retry = parametersOfSearch.parameters.Etiquette_GES;
+        const adress_retry = parametersOfSearch.parameters.Surface_habitable_logement;
+
+        // console.log(parametersOfSearch);
+
+        // console.log(DPE_retry);
+        // console.log(GES_retry);
+        // console.log(adress_retry);
+        
+
+        return (searchByInfos(idUser,parametersOfSearch.parameters.address,parametersOfSearch.parameters.Etiquette_GES,parametersOfSearch.parameters.Etiquette_DPE,parametersOfSearch.parameters.Surface_habitable_logement,parametersOfSearch.parameters.Suraface_minimale,parametersOfSearch.parameters.Surface_maximale));
 
         } catch (error) {
-        console.error('Erreur lors de la suppression de la recherche :', error);
+        console.error('Erreur lors de la relancement de recherche :', error);
         throw error;
     }
 }
+
+
 // Supprimer une recherche par son ID
 deleteSearchById = async function deleteSearchById(userId, searchId) {
     try {

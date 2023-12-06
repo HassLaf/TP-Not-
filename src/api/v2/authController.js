@@ -6,14 +6,27 @@ const userBase = require('../../models/userShema')
 loginFunction = async function loginFunction(req, res) {
     const { email, password } = req.body;
     const loginResult = await loginService.login(email, password);
-    console.log(loginResult.accessToken);
-    if (loginResult.accessToken) {
-        res.json({ accessToken: loginResult.accessToken });
+    
+    if (loginResult.accessToken && loginResult.refreshAcessToken) {
+        res.json({ accessToken: loginResult.accessToken,
+                   refreshToken: loginResult.refreshAcessToken});
     } else {
         res.status(404).json({ message: loginResult.error || 'Erreur lors de l\'authentification' });
     }
 }
 
+refreshController = async function refreshController(req,res){
+    const { refreshToken } = req.body;
+    const newToken = await loginService.refresh(refreshToken);
+    if (newToken.accessToken){
+        res.json({accessToken : newToken.accessToken});
+    } else {
+        res.status(404).json({message: newToken.error || 'Erreur d\'authetification avec refreshToken'});
+    }
+
+}
+
 module.exports = {
-    loginFunction,
+    loginController,
+    refreshController
 }

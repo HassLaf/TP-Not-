@@ -8,9 +8,22 @@ require('dotenv').config();
 key_ACCESS = process.env.ACCESS_TOKEN_SECRET;
 
 generateAccessToken = function generateAccessToken(user) {
-    console.log(key_ACCESS)
     return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
   }
+
+generateRefreshToken = function generateRefreshToken(user) {
+  return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1y' });
+}
+
+// Fonction pour vérifier refreshToken
+verifyRefreshToken = function verifyRefreshToken(refreshToken) {
+  try {
+      const status = jwt.verify(refreshToken, process.env.JWT_SECRET_REFRESH);
+      return status;
+  } catch (error) {
+      throw error; // Vous pouvez gérer les erreurs spécifiques ici
+  }
+}
 
 authenticateToken =  function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization']
@@ -27,24 +40,4 @@ authenticateToken =  function authenticateToken(req, res, next) {
     });
   }
   
-// const authenticateUser = async (username, password) => {
-//     const user = await userModel.findOne({ username });
-    
-//     if (!user || !bcrypt.compareSync(password, user.password)) {
-//       return null; // Les informations d'identification ne sont pas valides
-//     }
-  
-//     return user;
-//   };
-  
-
-// const verifyToken = (token) => {
-//   try {
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-//     return decoded;
-//   } catch (err) {
-//     return null;
-//   }
-// };
-
-module.exports = { generateAccessToken,authenticateToken };
+module.exports = { generateAccessToken,authenticateToken,generateRefreshToken,verifyRefreshToken };
