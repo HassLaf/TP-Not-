@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "13b0abb4-836e-4387-a254-4728310b110c",
+		"name": "Search Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31410848"
+	},
+	"item": [
+		{
+			"name": "searchRequests",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTZmYWFkNWY5MzNiNTYzOTk0ZmQyYjIiLCJuYW1lIjoidHBOb3RlIiwiZW1haWwiOiJ0cE5vdGVnbWFpbC5jb20iLCJpYXQiOjE3MDE4MTcyMDYsImV4cCI6MTcwMTgyMDgwNn0.CP-gFB3dBSjO6RfJDm-viWXM4L67i2fiMw1QHzPw56g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"codePostal\": 72300,\r\n    \"GES\" : \"A\",\r\n    \"DPE\": \"A\",\r\n    \"surface_req\" : 58,\r\n    \"surfaceMin_req\" : 30,\r\n    \"surfaceMax_req\" : 40\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteSearchRequest",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTY0NmQ1ZjcwM2NmNGFlZjdiOTA3NGEiLCJuYW1lIjoiSGFzc2FuIExGIiwiZW1haWwiOiJIYXNzYW5AZ21haWwuY29tIiwiaWF0IjoxNzAxODExNTM1LCJleHAiOjE3MDE4MTUxMzV9.Icufb6vLbVu2QxLftcDwqURC3w5EAbskkFZpUkSsU00",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idSearch\" : \"656f7e99f7388358fb8e4356\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/deleteSearch",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"deleteSearch"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "historySearch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTZmYWFkNWY5MzNiNTYzOTk0ZmQyYjIiLCJuYW1lIjoidHBOb3RlIiwiZW1haWwiOiJ0cE5vdGVnbWFpbC5jb20iLCJpYXQiOjE3MDE4MTcyMDYsImV4cCI6MTcwMTgyMDgwNn0.CP-gFB3dBSjO6RfJDm-viWXM4L67i2fiMw1QHzPw56g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/history",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"history"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "retrySearch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTZmYWFkNWY5MzNiNTYzOTk0ZmQyYjIiLCJuYW1lIjoidHBOb3RlIiwiZW1haWwiOiJ0cE5vdGVnbWFpbC5jb20iLCJpYXQiOjE3MDE4MTg0NzYsImV4cCI6MTcwMTgyMjA3Nn0.xn066i42CpYHxyPX4RZbFzocj38mrovLhc3VP1JxXWg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idSearch\" : \"656fab93f933b563994fd2ba\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/retrySearch",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"retrySearch"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
