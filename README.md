@@ -1,4 +1,4 @@
-Pour Tester :
+Pour Tester :\n
   Il y a un fichier .envExemple qui contient l'ensemble des variables d'envirenement à définir :
     PORT= le porte auxquels vous souhaitez lancer votre serveur.
     DATABASE_URL= l'url de notre base de données (dans notre cas c'est : mongodb+srv://student:ensim@clusterdpe.dly181i.mongodb.net/dpe?retryWrites=true&w=majority)
