@@ -18,10 +18,10 @@ generateRefreshToken = function generateRefreshToken(user) {
 // Fonction pour vérifier refreshToken
 verifyRefreshToken = function verifyRefreshToken(refreshToken) {
   try {
-      const status = jwt.verify(refreshToken, process.env.JWT_SECRET_REFRESH);
+      const status = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
       return status;
   } catch (error) {
-      throw error; // Vous pouvez gérer les erreurs spécifiques ici
+      throw error; 
   }
 }
 

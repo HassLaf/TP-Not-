@@ -3,7 +3,7 @@ const authService = require('../../services/authService');
 const loginService = require('../../services/login');
 const userBase = require('../../models/userShema')
 
-loginFunction = async function loginFunction(req, res) {
+loginController = async function loginController(req, res) {
     const { email, password } = req.body;
     const loginResult = await loginService.login(email, password);
     
