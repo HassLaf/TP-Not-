@@ -1,4 +1,7 @@
 # TP-Note- Readme
+## pour lancer le serveur :
+
+Il suffit de se rendre dans le répertoire "src" et d'exécuter la commande "node app.js".
 
 ## Pour Tester :
 
