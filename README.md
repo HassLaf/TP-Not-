@@ -6,8 +6,8 @@
 2. Définissez les variables d'environnement suivantes dans le fichier `.env` :
 
     - `PORT`: le port sur lequel vous souhaitez lancer votre serveur.
-    - `DATABASE_URL`: l'URL de votre base de données (exemple : `mongodb+srv://student:ensim@clusterdpe.dly181i.mongodb.net/dpe?retryWrites=true&w=majority`).
-    - `API_SEARCH_DATA`: l'URL de l'API Nominatim que vous souhaitez interroger (exemple : `https://nominatim.openstreetmap.org/search?`).
+    - `DATABASE_URL`: l'URL de votre base de données;
+    - `API_SEARCH_DATA`: l'URL de l'API Nominatim que vous souhaitez interroger.
     - `ACCESS_TOKEN_SECRET`: "votreSecret".
     - `REFRESH_TOKEN_SECRET`: "votreRefreshSecret".
 
